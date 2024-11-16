@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yanshen <yanshen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 23:30:17 by yanshen           #+#    #+#             */
-/*   Updated: 2024/11/16 17:45:28 by yanshen          ###   ########.fr       */
+/*   Created: 2024/11/13 20:55:03 by yanshen           #+#    #+#             */
+/*   Updated: 2024/11/14 14:57:15 by yanshen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
+int	main ()
 {
-	size_t	lensrc;
-	size_t	i;
+    char str[] = "abcd";
+    int c = 'c';
+	write (1, ft_strchr(str, c), 1);
 
-	i = 0;
-	lensrc = ft_strlen(src);
-	if (siz == 0)
-		return (lensrc);
-	while (i < (siz - 1) && src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (lensrc);
+	printf("%d\n", ft_isalpha('a'));
+	printf("%d\n", ft_isdigit('1'));
+	printf("%d\n", ft_isalnum('1'));
+	printf("%d\n", ft_toupper('a'));
+	printf("%d\n", ft_tolower('B'));
+	printf("%zu\n", ft_strlen("abcde"));
+	printf("%d\n", ft_isprint('c'));
 }

@@ -6,21 +6,21 @@
 /*   By: yanshen <yanshen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:30:00 by yanshen           #+#    #+#             */
-/*   Updated: 2024/11/14 18:48:49 by yanshen          ###   ########.fr       */
+/*   Updated: 2024/11/16 13:41:19 by yanshen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    *calloc (size_t nmemb, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-    char    *dst;
+	char	*dst;
 
-    if (nmemb == 0 || size == 0)
-        return (NULL);
-    dst = malloc(size * nmemb);
-    if (!dst)
-        return (NULL);
-    memset(dst, 0, size * nmemb);
-    return dst;
+	if (nmemb == 0 || size == 0)
+		return (NULL);
+	dst = malloc(size * nmemb);
+	if (!dst)
+		return (NULL);
+	ft_memset(dst, 0, size * nmemb);
+	return (dst);
 }

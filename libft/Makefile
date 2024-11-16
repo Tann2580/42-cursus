@@ -6,7 +6,7 @@
 #    By: yanshen <yanshen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/13 17:50:29 by yanshen           #+#    #+#              #
-#    Updated: 2024/11/13 23:13:24 by yanshen          ###   ########.fr        #
+#    Updated: 2024/11/16 16:56:01 by yanshen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ CFLAGS	= -Wall -Wextra -Werror
 all	: $(NAME)
 com : $(TEST)
 
+$(NAME)	: $(OBJS)
+	ar rcs $(NAME) $(OBJS)
+	
 $(TEST)	: $(OBJS)
 	cc $(OBJS) -o $(TEST)
 

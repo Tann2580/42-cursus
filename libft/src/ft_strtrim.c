@@ -24,23 +24,24 @@ int	ft_intheset(char const c, char const *set)
 
 int	ft_setup(char const *s1, char const *set)
 {
-	int	i;
+	int	start;
+	int	end;
 	int	counter;
 
-	i = 0;
+	start = 0;
+	end = ft_strlen(s1);
 	counter = 0;
-	while (s1[i])
-	{
-		if (ft_intheset(s1[i], set))
-			counter++;
-		i++;
-	}
+	while (s1[start] && ft_intheset(s1[start++], set))
+		counter++;
+	while (s1[end] && ft_intheset(s1[end--], set))
+		counter++;
 	return (ft_strlen(s1) - counter + 1);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		i;
+	int		start;
+	int		end;
 	int		j;
 	char	*strtrim;
 
@@ -49,21 +50,22 @@ char	*ft_strtrim(char const *s1, char const *set)
 	strtrim = malloc(sizeof(char const) * (ft_setup(s1, set)));
 	if (!strtrim)
 		return (NULL);
+	end = ft_strlen(s1);
+	start = 0;
 	j = 0;
-	i = 0;
-	while (s1[i])
-	{
-		while (ft_intheset(s1[i], set) && s1[i])
-			i++;
-		strtrim[j++] = s1[i++];
-	}
+	while (ft_intheset(s1[start], set) && s1[start])
+		start++;
+	while (ft_intheset(s1[end - 1], set) && end > 0)
+		end--;
+	while (start < end)
+		strtrim[j++] = s1[start++];
 	strtrim[j] = '\0';
 	return (strtrim);
 }
 /*
 int	main()
 {
-	char const *s1 = "abc da ,, adsl,,,";
+	char const *s1 = "1 ";
 	char const *set = ", ";
 	char	*str = ft_strtrim(s1, set);
 	

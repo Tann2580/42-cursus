@@ -6,7 +6,7 @@
 /*   By: yanshen <yanshen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 16:06:57 by yanshen           #+#    #+#             */
-/*   Updated: 2024/11/17 19:53:28 by yanshen          ###   ########.fr       */
+/*   Updated: 2024/11/19 13:41:49 by yanshen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*dest;
-	unsigned int	i;
+	char				*dest;
+	unsigned int		i;
 
 	if (!s)
 		return (NULL);

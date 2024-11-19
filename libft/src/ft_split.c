@@ -6,7 +6,7 @@
 /*   By: yanshen <yanshen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 19:37:53 by yanshen           #+#    #+#             */
-/*   Updated: 2024/11/17 23:24:43 by yanshen          ###   ########.fr       */
+/*   Updated: 2024/11/18 13:18:43 by yanshen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_count(char const *s, char c)
 	{
 		while (s[i] && s[i] == c)
 			i++;
-		if(s[i])
+		if (s[i])
 			counter++;
 		while (s[i] && s[i] != c)
 			i++;
@@ -31,19 +31,11 @@ int	ft_count(char const *s, char c)
 	return (counter);
 }
 
-char	*ft_word(char const *s, char c, int i, int j)
+char	*ft_word(char const *s, int i, int j)
 {
 	char	*word;
-	int	index;
-	int	k;
+	int		k;
 
-	i = 0;
-	index = 0;
-	while (s[i] && s[i] == c)
-		i++;
-	j = i;
-	while (s[i] && s[i] != c)
-		i++;
 	k = 0;
 	if (i - j > 0)
 	{
@@ -54,6 +46,8 @@ char	*ft_word(char const *s, char c, int i, int j)
 			word[k++] = s[j++];
 		word[k] = '\0';
 	}
+	else
+		return (NULL);
 	return (word);
 }
 
@@ -64,29 +58,27 @@ void	*ft_free(char **str, int index)
 	free(str);
 	return (NULL);
 }
-	
+
 char	**ft_split(char const *s, char c)
 {
 	char	**split;
-	int		counter;
 	int		index;
 	int		i;
 	int		j;
 
-	counter = ft_count(s, c);
-	split = malloc(sizeof(char *) * (counter + 1));
+	i = 0;
+	split = malloc(sizeof(char *) * (ft_count(s, c) + 1));
 	if (!split)
 		return (NULL);
-	   index = 0;
-        while (s[i] && s[i] == c)
-                i++;
-        j = i;
-        while (s[i] && s[i] != c)
-                i++;
 	index = 0;
-	while (index < counter)
+	while (index < ft_count(s, c))
 	{
-		split[index] = ft_word(s, c, i, j);
+		while (s[i] && s[i] == c)
+			i++;
+		j = i;
+		while (s[i] && s[i] != c)
+			i++;
+		split[index] = ft_word(s, i, j);
 		if (!split[index])
 			return (ft_free(split, index));
 		index++;
@@ -94,7 +86,7 @@ char	**ft_split(char const *s, char c)
 	split[index] = NULL;
 	return (split);
 }
-
+/*
 int	main()
 {
 	char	*s = ",,,abc,,ddf,,a,,,,af,,";
@@ -111,8 +103,7 @@ int	main()
 	}
 	return (0);
 }
-
-/*,,,abc,,df,a,,ads,,,
+,,,abc,,df,a,,ads,,,
  * count nb words
  * 	if == c i++;
  * 	if !=c i++;

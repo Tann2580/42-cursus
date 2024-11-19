@@ -6,7 +6,7 @@
 /*   By: yanshen <yanshen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 20:42:37 by yanshen           #+#    #+#             */
-/*   Updated: 2024/11/16 13:52:14 by yanshen          ###   ########.fr       */
+/*   Updated: 2024/11/19 13:47:06 by yanshen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
-	int	j;
+	int				i;
+	int				j;
+	unsigned char	cc;	
 
+	cc = (unsigned char)c;
 	i = 0;
 	j = -1;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (s[i] == cc)
 			j = i;
 		i++;
 	}
-	if (c == '\0')
+	if (cc == '\0')
 		return ((char *)&s[i]);
 	if (j == -1)
 		return (NULL);

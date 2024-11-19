@@ -31,7 +31,8 @@ char	*ft_strcat(char *dest, const char *src)
 	int	len;
 	int	i;
 
-	len =  ft_strlen(dest);
+	i = 0;
+	len = ft_strlen(dest);
 	while (src[i])
 	{
 		dest[i + len] = src[i];
@@ -44,8 +45,6 @@ char	*ft_strcat(char *dest, const char *src)
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*dest;
-	int	index1;
-	int	index2;
 
 	dest = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!dest)

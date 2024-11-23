@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yanshen <yanshen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 16:06:57 by yanshen           #+#    #+#             */
-/*   Updated: 2024/11/19 15:04:55 by yanshen          ###   ########.fr       */
+/*   Created: 2024/11/19 16:56:48 by yanshen           #+#    #+#             */
+/*   Updated: 2024/11/22 21:31:18 by yanshen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char				*dest;
-	size_t				i;
+	t_list	*dest;
+	t_list	*newnode;
+	void	*content;
 
-	if (!s)
+	if (!lst || !f)
 		return (NULL);
-	if (start > ft_strlen(s))
-		return (ft_strdup(""));
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
-	i = 0;
-	dest = malloc(sizeof(char) * (len + 1));
-	if (!dest)
-		return (NULL);
-	while (i < len && s[start + i])
+	dest = NULL;
+	while (lst)
 	{
-		dest[i] = s[start + i];
-		i++;
+		content = f(lst->content);
+		newnode = ft_lstnew(content);
+		if (!newnode)
+		{
+			del(content);
+			ft_lstclear(&dest, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&dest, newnode);
+		lst = lst->next;
 	}
-	dest[i] = '\0';
 	return (dest);
 }
-/*
- * find the start point 
- * while len>0  && not the end 
- * copy from s to dst*/

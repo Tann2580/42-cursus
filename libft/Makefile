@@ -6,36 +6,50 @@
 #    By: yanshen <yanshen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/13 17:50:29 by yanshen           #+#    #+#              #
-#    Updated: 2024/11/16 16:56:01 by yanshen          ###   ########.fr        #
+#    Updated: 2024/11/22 20:57:36 by yanshen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libft.a
 TEST	= test
 SRC	= src
+BSRC	= bsrc
+HDIR	=./includes
 
-SRCS	= $(wildcard $(SRC)/*.c)
-OBJS	= $(SRCS:.c=.o) 
+SRCS = \
+	ft_atoi.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
+	ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memcpy.c ft_memmove.c \
+	ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c \
+	ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
+	ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
+	ft_itoa.c  ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
+	ft_putendl_fd.c ft_putnbr_fd.c
+BSRCS = \
+	ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c \
+	ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
+	
+OBJS	= $(SRCS:.c=.o)
+BOBJS	= $(BSRCS:.c=.o)
+
 CFLAGS	= -Wall -Wextra -Werror
 
 all	: $(NAME)
-com : $(TEST)
 
-$(NAME)	: $(OBJS)
+bonus: $(NAME) $(BOBJS)
+	ar rcs $(NAME) $(BOBJS)
+
+$(NAME)	: $(OBJS) 
 	ar rcs $(NAME) $(OBJS)
-	
-$(TEST)	: $(OBJS)
-	cc $(OBJS) -o $(TEST)
 
-$(OBJ)/%.o : $(SRC)/%.c libft.h
-	cc $(CFLAGS) -I libft.h -c $< -o $@
+%.o: %.c
+	cc $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BOBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re : fclean $(NAME)
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re bonus

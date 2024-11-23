@@ -1,41 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yanshen <yanshen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 16:06:57 by yanshen           #+#    #+#             */
-/*   Updated: 2024/11/19 15:04:55 by yanshen          ###   ########.fr       */
+/*   Created: 2024/11/14 18:20:30 by yanshen           #+#    #+#             */
+/*   Updated: 2024/11/16 13:43:51 by yanshen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+static void	ft_strcpy(char *dest, char *src)
 {
-	char				*dest;
-	size_t				i;
+	int	i;
 
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-		return (ft_strdup(""));
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
 	i = 0;
-	dest = malloc(sizeof(char) * (len + 1));
-	if (!dest)
-		return (NULL);
-	while (i < len && s[start + i])
+	while (src[i])
 	{
-		dest[i] = s[start + i];
+		dest[i] = src[i];
 		i++;
 	}
 	dest[i] = '\0';
-	return (dest);
 }
-/*
- * find the start point 
- * while len>0  && not the end 
- * copy from s to dst*/
+
+char	*ft_strdup(const char *s)
+{
+	char	*dst;
+
+	dst = malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (!dst)
+		return (NULL);
+	ft_strcpy(dst, (char *)s);
+	return (dst);
+}
